@@ -21,6 +21,10 @@ function processFeedItem(item) {
     contents += '---\n';
     contents += 'title: "' + item.title + '"\n';
     contents += 'date: "' + item.date + '"\n';
+    contents += 'tags: \n';
+    item['rss:category'].forEach(function(category) {
+      contents += ' - ' + category['#'] + '\n';
+    });
     contents += '---\n';
     contents += item['rss:description']['#'];
 
