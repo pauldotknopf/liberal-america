@@ -4,9 +4,7 @@ var request = require('request');
 var fs = require('fs');
 var querystring = require('querystring');
 var url = require('url');
-var sanitize = require("sanitize-filename");
 var path = require('path');
-var htmlencode = require('ent/encode');
 var cheerio = require('cheerio');
 
 function scrapePage(url) {
