@@ -5,6 +5,7 @@ set -e # Exit with nonzero exit code if anything fails
 # make sure we are on the latest version
 cd source
 git pull origin posts
+git checkout posts
 cd ..
 
 # this will output posts into the source directory submodule
