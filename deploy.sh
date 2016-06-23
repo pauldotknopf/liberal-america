@@ -35,6 +35,7 @@ cd ..
 
 # Run our compile script
 doCompile
+cp -r public/* out
 
 cd out
 git config user.name "Travis CI"
