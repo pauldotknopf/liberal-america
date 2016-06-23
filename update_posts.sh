@@ -34,6 +34,6 @@ fi
 echo $SSH_REPO
 echo $REPO
 
-git add .
+git add . &>/dev/null
 git commit -m "Update posts [ci skip]"
 git push $SSH_REPO posts

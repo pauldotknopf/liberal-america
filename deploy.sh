@@ -37,7 +37,7 @@ cd ..
 
 # Clean out existing contents
 cd out
-git rm -r .
+git rm -r . &>/dev/null
 cd ..
 
 # Run our compile script
@@ -55,7 +55,7 @@ if [ "$(git status --porcelain)" = "" ]; then
     exit 0
 fi
 
-git add .
+git add . &>/dev/null
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Now that we're all set up, we can push.
