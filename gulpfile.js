@@ -63,6 +63,12 @@ function scrapePage(url) {
               encEmailElement.replaceWith(decryptCloudFlareEmail(encEmailElement.attr('data-cfemail')));
             });
 
+            $('.youtube-player', childElement).each(function(playerIndex, playerElement) {
+              console.log('found player');
+              var src = $(playerElement).attr('src');
+              $(playerElement).attr('src', src.replace('http://www.youtube.com/embed/', '//www.youtube.com/embed/'));
+            });
+
             html += $.html(childElement);
 
           });
