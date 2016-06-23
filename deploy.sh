@@ -29,7 +29,7 @@ gulp
 if [ "$(git status source/_posts/* --porcelain)" = "" ]; then
   echo "There are no new post updates."
 else
-  git add .
+  git add source/_posts/*
   git commit -m "Update posts [ci skip]"
   git push $SSH_REPO $SOURCE_BRANCH
 fi
