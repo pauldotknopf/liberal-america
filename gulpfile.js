@@ -7,7 +7,14 @@ var url = require('url');
 var path = require('path');
 var cheerio = require('cheerio');
 
+function decryptCloudFlareEmail(content) {
+  var e, r, n, i, a = content;
+  for (e = "", r = parseInt(a.substr(0, 2), 16), n = 8; a.length - n; n += 2) i = parseInt(a.substr(n, 2), 16) ^ r, e += String.fromCharCode(i);
+  return e;
+}
+
 function scrapePage(url) {
+  //url = 'http://www.liberalamerica.org/2016/06/22/breaking-house-democrats-stage-sit-in-over-gun-violence-video/';
   return new Promise(function(resolve, reject) {
     request({ url, headers: { 'User-Agent': 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36' } }, function(error, response, html){
 
@@ -47,6 +54,14 @@ function scrapePage(url) {
             if($(childElement).hasClass('comments-area')) {
               return;
             }
+
+            // decrypt cloudflare encoded emails
+            $('.__cf_email__', childElement).each(function(encEmailIndex, encEmailElement) {
+              var next = encEmailElement.nextSibling;
+              $(next).remove();
+              encEmailElement = $(encEmailElement);
+              encEmailElement.replaceWith(decryptCloudFlareEmail(encEmailElement.attr('data-cfemail')));
+            });
 
             html += $.html(childElement);
 
