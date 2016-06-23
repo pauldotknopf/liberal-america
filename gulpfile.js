@@ -165,7 +165,7 @@ gulp.task('default', function(cb) {
   }
 
   Promise.all(promises).then(function(results) {
-    console.log(results);
+    console.log('Finished!');
   });
 
 });
