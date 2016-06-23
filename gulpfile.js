@@ -68,7 +68,12 @@ function scrapePage(url) {
               $(iFrameElement).attr('src', src.replace(/^(http|https):/, ''));
             });
 
-            html += $.html(childElement);
+            var generatedHtml = $.html(childElement);
+
+            // update all wp cdn urls to be protocol-less
+            generatedHtml = generatedHtml.replace(/(http|https):\/\/i0.wp.com\/cdn./g, '//i0.wp.com/cdn.');
+
+            html += generatedHtml;
 
           });
         });
