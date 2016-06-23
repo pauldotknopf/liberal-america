@@ -14,7 +14,6 @@ function decryptCloudFlareEmail(content) {
 }
 
 function scrapePage(url) {
-  url = 'http://www.liberalamerica.org/2016/06/22/paul-ryan-tried-to-silence-house-democrats-gun-violence-sit-in-so-theyre-live-streaming-it/';
   return new Promise(function(resolve, reject) {
     request({ url, headers: { 'User-Agent': 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36' } }, function(error, response, html){
 
@@ -95,7 +94,6 @@ function processFeedItem(item) {
     });
     contents += '---\n';
 
-    //item.link = 'http://www.liberalamerica.org/2016/06/21/gop-senate-blood-hands-video/';
     scrapePage(item.link).then(function(html) {
       fs.unlink(destination, function() {
         contents += html;
