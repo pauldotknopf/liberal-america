@@ -2,6 +2,8 @@
 
 set -e # Exit with nonzero exit code if anything fails
 
+exit 0
+
 # Save some useful information
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
