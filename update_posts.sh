@@ -30,6 +30,9 @@ if [ "$(git status --porcelain)" = "" ]; then
   exit 0
 fi
 
+echo $SSH_REPO
+echo $REPO
+
 git add .
 git commit -m "Update posts [ci skip]"
 git push $SSH_REPO posts
