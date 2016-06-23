@@ -8,7 +8,6 @@ var path = require('path');
 var cheerio = require('cheerio');
 
 function scrapePage(url) {
-  console.log(url);
   return new Promise(function(resolve, reject) {
     request({ url, headers: { 'User-Agent': 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36' } }, function(error, response, html){
 
@@ -97,7 +96,7 @@ gulp.task('default', function(cb) {
 
   var promises = [];
 
-  for(var page = 1; page <= 20; page++)
+  for(var page = 1; page <= 1; page++)
   {
     promises.push(new Promise((resolve, reject) => {
       var req = request('http://www.liberalamerica.org/page/' + page + '/?s=+&feed=rss2');
