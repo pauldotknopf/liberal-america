@@ -2,15 +2,12 @@
 
 set -e # Exit with nonzero exit code if anything fails
 
-exit 0
+./update_posts.sh
 
 # Save some useful information
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
-
-git config user.name "Travis CI"
-git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 chmod 600 deploy_key
 eval `ssh-agent -s`
@@ -31,16 +28,6 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     exit 0
 fi
 
-# scrape the webpage
-gulp
-if [ "$(git status source/_posts/* --porcelain)" = "" ]; then
-  echo "There are no new post updates."
-else
-  git add source/_posts/*
-  git commit -m "Update posts [ci skip]"
-  git push $SSH_REPO $SOURCE_BRANCH
-fi
-
 # Clone the existing gh-pages for this repo into out/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
 git clone $REPO out
@@ -58,6 +45,7 @@ doCompile
 cp -r public/* out
 
 cd out
+
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
