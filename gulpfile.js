@@ -111,7 +111,7 @@ gulp.task('default', function(cb) {
 
   var promises = [];
 
-  for(var page = 1; page <= 1; page++)
+  for(var page = 1; page <= 2; page++)
   {
     promises.push(new Promise((resolve, reject) => {
       var req = request('http://www.liberalamerica.org/page/' + page + '/?s=+&feed=rss2');
