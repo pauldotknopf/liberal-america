@@ -2,13 +2,13 @@
 menu:
   Home: /
   Archives: /archives
-  Money: /tags/money/
-  Issues: /tags/issues
-  Lifestyle: /tags/lifestyle
-  Politics: /tags/politics
-  Pulse: /tags/pulse
-  Editorials: /tags/editorials
-  News: /tags/news
+  Money: /tags/Money/
+  Issues: /tags/Issues
+  Lifestyle: /tags/Lifestyle
+  Politics: /tags/Politics
+  Pulse: /tags/Pulse
+  Editorials: /tags/Editorials
+  News: /tags/News
   Rss:
     url: atom.xml
     icon: rss
