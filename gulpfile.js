@@ -82,7 +82,7 @@ function scrapePage(url) {
 
             // update all wp cdn urls to be protocol-less
             generatedHtml = generatedHtml
-            .replace(/(http|https):\/\/i\d.wp.com\/cdn./g, function(match, p1, p2) {
+            .replace(/(http|https):\/\/(i\d.wp.com\/cdn.|cdn.liberalamerica.org)/g, function(match, p1, p2) {
               return match.replace(/(http|https):/g, '');
             });
 
