@@ -48,7 +48,11 @@ function scrapePage(url) {
               return;
             }
 
-            if($('script[src="//pagead2.googlesyndication.com/pagead/show_ads.js"]', childElement).length) {
+            if($('script[src="//pagead2.googlesyndication.com/pagead/show_ads.js"]', childElement).length > 0) {
+              return;
+            }
+
+            if($('.sharedaddy', childElement).length > 0) {
               return;
             }
 
@@ -87,7 +91,6 @@ function scrapePage(url) {
             });
 
             html += generatedHtml;
-
           });
         });
 
