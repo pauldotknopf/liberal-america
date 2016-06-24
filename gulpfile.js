@@ -81,7 +81,10 @@ function scrapePage(url) {
             var generatedHtml = $.html(childElement);
 
             // update all wp cdn urls to be protocol-less
-            generatedHtml = generatedHtml.replace(/(http|https):\/\/i0.wp.com\/cdn./g, '//i0.wp.com/cdn.');
+            generatedHtml = generatedHtml
+            .replace(/(http|https):\/\/i\d.wp.com\/cdn./g, function(match, p1, p2) {
+              return match.replace(/(http|https):/g, '');
+            });
 
             html += generatedHtml;
 
