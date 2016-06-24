@@ -2,12 +2,19 @@
 menu:
   Home: /
   Archives: /archives
-  Github:
-    url: https://github.com/klugjo/hexo-theme-clean-blog
-    icon: github
+  Money: /tags/money/
+  Issues: /tags/issues
+  Lifestyle: /tags/lifestyle
+  Politics: /tags/politics
+  Pulse: /tags/pulse
+  Editorials: /tags/editorials
+  News: /tags/news
+  Rss:
+    url: atom.xml
+    icon: rss
 
 # Title on top left of menu. Leave empty to use main blog title
-menu_title: Configurable Title
+menu_title: Liberal America
 
 # URL of the Home page image
 index_cover: http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg
@@ -35,6 +42,5 @@ addthis:
 twitter_url:
 twitter_handle:
 facebook_url:
-github_url: https://github.com/klugjo/hexo-theme-clean-blog
 linkedin_url:
 mailto:

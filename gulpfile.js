@@ -7,6 +7,10 @@ var url = require('url');
 var path = require('path');
 var cheerio = require('cheerio');
 
+function toTitleCase(str) {
+  return str.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+}
+
 function decryptCloudFlareEmail(content) {
   var e, r, n, i, a = content;
   for (e = "", r = parseInt(a.substr(0, 2), 16), n = 8; a.length - n; n += 2) i = parseInt(a.substr(n, 2), 16) ^ r, e += String.fromCharCode(i);
@@ -25,6 +29,12 @@ function scrapePage(url) {
         var $ = cheerio.load(html);
 
         var html = '';
+
+        var categories = [];
+
+        $('.current-post-ancestor').each(function(index, element) {
+          categories.push($(element).children("a").html());
+        });
 
         $('.post-column .entry').each(function(index, element) {
 
@@ -78,7 +88,12 @@ function scrapePage(url) {
           });
         });
 
-        resolve(html);
+        resolve({
+          html,
+          categories: categories.filter(function(elem, pos) {
+            return categories.indexOf(elem) == pos;
+          })
+        });
     })
   });
 }
@@ -94,14 +109,21 @@ function processFeedItem(item) {
     contents += 'title: "' + item.title + '"\n';
     contents += 'date: "' + item.date + '"\n';
     contents += 'tags: \n';
-    item['rss:category'].forEach(function(category) {
-      contents += ' - ' + category['#'] + '\n';
-    });
-    contents += '---\n';
 
-    scrapePage(item.link).then(function(html) {
+
+    scrapePage(item.link).then(function(scraped) {
       fs.unlink(destination, function() {
-        contents += html;
+        item['rss:category'].forEach(function(category) {
+          scraped.categories.push(category['#']);
+        });
+        var uniqueCategories = scraped.categories.filter(function(elem, pos) {
+          return scraped.categories.indexOf(elem) == pos;
+        });
+        uniqueCategories.forEach(function(category) {
+          contents += ' - ' + toTitleCase(category) + '\n';
+        });
+        contents += '---\n';
+        contents += scraped.html;
         fs.writeFile(destination, contents, function(error) {
           if(error) {
             reject(error);
@@ -120,7 +142,7 @@ gulp.task('default', function(cb) {
 
   var promises = [];
 
-  for(var page = 1; page <= 5; page++)
+  for(var page = 1; page <= 20; page++)
   {
     promises.push(new Promise((resolve, reject) => {
       var req = request('http://www.liberalamerica.org/page/' + page + '/?s=+&feed=rss2');
