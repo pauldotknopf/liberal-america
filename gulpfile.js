@@ -110,11 +110,10 @@ function processFeedItem(item) {
     contents += 'date: "' + item.date + '"\n';
     contents += 'tags: \n';
 
-
     scrapePage(item.link).then(function(scraped) {
       fs.unlink(destination, function() {
-        item['rss:category'].forEach(function(category) {
-          scraped.categories.push(category['#']);
+        item.categories.forEach(function(category) {
+          scraped.categories.push(category);
         });
         var uniqueCategories = scraped.categories.filter(function(elem, pos) {
           return scraped.categories.indexOf(elem) == pos;
