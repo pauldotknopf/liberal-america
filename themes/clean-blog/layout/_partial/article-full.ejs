@@ -32,16 +32,9 @@
     <div class="container">
         <div class="row">
 
-            <!-- Tags and categories -->
-           <% if (item.categories && item.categories.length || item.tags && item.tags.length) { %>
-                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
-                    <% if (item.tags && item.tags.length){ %>
-                        <%- partial('article-tags', {item: item}) %>
-                    <% } else { %>
-                        <%- partial('article-categories', {item: item}) %>
-                    <% } %>
-                </div>
-                <div class="col-lg-4 col-md-5 post-categories">
+            <!-- Categories -->
+           <% if (item.categories && item.categories.length) { %>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
                     <% if (item.tags && item.tags.length && item.categories && item.categories.length){ %>
                         <%- partial('article-categories', {item: item}) %>
                     <% } %>
@@ -66,13 +59,25 @@
                 <% } %>
             </div>
 
+            <!-- Tags -->
+           <% if (item.tags && item.tags.length) { %>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                    <% if (item.tags && item.tags.length){ %>
+                        <%- partial('article-tags', {item: item}) %>
+                    <% } else { %>
+                        <%- partial('article-categories', {item: item}) %>
+                    <% } %>
+                </div>
+            <% } %>
+
+            <!--  Paging -->
             <% if (item.prev || item.next){ %>
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="pager">
-                    <% if (item.prev){ %>
+                    <% if (item.next){ %>
                         <li class="previous"><a href="<%- url_for(item.next.path) %>">&larr;  <%- __('next')%></a></li>
                     <% } %>
-                    <% if (item.next){ %>
+                    <% if (item.prev){ %>
                         <li class="next"><a href="<%- url_for(item.prev.path) %>"><%- __('prev')%>  &rarr;</a></li>
                     <% } %>
                 </ul>
