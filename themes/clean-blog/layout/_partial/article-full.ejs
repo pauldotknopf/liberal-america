@@ -74,11 +74,11 @@
             <% if (item.prev || item.next){ %>
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="pager">
-                    <% if (item.next){ %>
-                        <li class="previous"><a href="<%- url_for(item.next.path) %>">&larr;  <%- __('next')%></a></li>
-                    <% } %>
                     <% if (item.prev){ %>
-                        <li class="next"><a href="<%- url_for(item.prev.path) %>"><%- __('prev')%>  &rarr;</a></li>
+                        <li class="previous"><a href="<%- url_for(item.prev.path) %>">&larr;  <%- __('next')%></a></li>
+                    <% } %>
+                    <% if (item.next){ %>
+                        <li class="next"><a href="<%- url_for(item.next.path) %>"><%- __('prev')%>  &rarr;</a></li>
                     <% } %>
                 </ul>
               </div>
