@@ -112,7 +112,7 @@ function processFeedItem(item) {
 
     var contents = '';
     contents += '---\n';
-    contents += 'title: "' + item.title + '"\n';
+    contents += 'title: "' + item.title.replace('’', '') + '"\n';
     contents += 'date: "' + item.date + '"\n';
     contents += 'tags: \n';
 
