@@ -18,7 +18,9 @@ TARGET_BRANCH="gh-pages"
 
 function doCompile {
   if ./compile.sh; then
+    echo 'Succesfully compiled...'
   else
+    echo 'Error compiling...'
     exit 0
   fi
 }
