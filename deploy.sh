@@ -17,12 +17,7 @@ SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
-  if ./compile.sh; then
-    echo 'Succesfully compiled...'
-  else
-    echo 'Error compiling...'
-    exit 0
-  fi
+  ./compile.sh
 }
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
